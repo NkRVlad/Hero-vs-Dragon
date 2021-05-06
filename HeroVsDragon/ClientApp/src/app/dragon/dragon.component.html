@@ -1,0 +1,87 @@
+<app-nav-menu-main></app-nav-menu-main>
+<div class="container">
+<p>List Dragon</p>
+<div>
+  <label style="margin-right: 10px;" >Name sort</label>
+  <button style="margin-right: 10px;" (click)="sortAsc()">Ascending</button>
+  <button style="margin-right: 10px;" (click)="sortDesc()">Descending</button>
+</div>
+<div>
+    <form #createDragonForm="ngForm" (ngSubmit)="createDragon(createDragonForm)">
+        <label style="margin-right: 10px;">Quantity dragons</label>
+        <select  id="quantity" name="quantity"  [(ngModel)] = "defaultSelect" ngModel style="width: 150px;" class="form-select">
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
+        <button style="margin-left: 10px;" class="btn btn-primary" type="submit">Create</button>
+    </form>
+</div>
+<div style="margin-bottom: 15px; margin-top: 15px;">
+  <button class="btn-primary" (click)="Discharge()">Discharge</button>
+</div>
+<div style="margin-bottom: 15px; margin-top: 15px;">
+    <form #searchIdDragonForm="ngForm" (ngSubmit)="searchIdDragon(searchIdDragonForm)">
+      <input  id="id" name="id" ngModel type="text" placeholder="Enter id dragon"/>
+      <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search id dragon</button>
+    </form>
+  </div>
+<div>
+  <div style="margin-bottom: 15px; margin-top: 15px;">
+    <form #searchNameForm="ngForm" (ngSubmit)="searchName(searchNameForm)">
+      <input  id="textSearch" name="textSearch" ngModel type="text" placeholder="Enter name"/>
+      <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search name</button>
+      <label style="margin-left: 10px;">All</label>
+      <input id="lengthName" style="margin-left: 4px;" value="1" ngModel name="lengthName" type="radio" checked>
+      <label style="margin-left: 10px;">More than 5 characters</label>
+      <input id="lengthName" style="margin-left: 4px;" ngModel value="5" name="lengthName" type="radio">
+      <label style="margin-left: 10px;">More than 10 characters</label>
+      <input id="lengthName" style="margin-left: 4px;" ngModel value="10" name="lengthName" type="radio">
+    </form>
+  </div>
+  <div style="margin-bottom: 15px; margin-top: 15px;">
+    <form #searchHPForm="ngForm" (ngSubmit)="searchHP(searchHPForm)">
+      <input  id="textSearch" name="textSearch" ngModel type="text" placeholder="Enter HP"/>
+      <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search HP</button>
+      <label style="margin-left: 10px;">More</label>
+      <input id="lengthHP" style="margin-left: 4px;" ngModel value="more" name="lengthHP" type="radio" checked>
+      <label style="margin-left: 10px;">Less</label>
+      <input id="lengthHP" style="margin-left: 4px;" ngModel value="less" name="lengthHP" type="radio">
+    </form>
+  </div>
+  <div style="margin-bottom: 15px; margin-top: 15px;">
+    <form #searchRemnantForm="ngForm" (ngSubmit)="searchRemnant(searchRemnantForm)">
+      <input  id="textSearch" name="textSearch" ngModel type="text" placeholder="Enter remnant"/>
+      <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search remnant</button>
+      <label style="margin-left: 10px;">More</label>
+      <input id="lengthRemnant" style="margin-left: 4px;" ngModel value="more" name="lengthRemnant" type="radio" checked>
+      <label style="margin-left: 10px;">Less</label>
+      <input id="lengthRemnant" style="margin-left: 4px;" ngModel value="less" name="lengthRemnant" type="radio">
+    </form>
+  </div>
+    <pagination-controls style="margin-left: 30%;"  class="pagination" (pageChange)="onPageChange($event)"></pagination-controls>
+  </div>
+  <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date_Time</th>
+          <th scope="col">HP</th>
+          <th scope="col">RemnantHP</th>
+          <th scope="col">Hit</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of dragon | paginate: { itemsPerPage: 30, currentPage: pageNumber, totalItems:Count }">
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.date_Time | date: 'short'}}</td>
+              <td>{{ item.hp }}</td>
+              <td>{{ item.remnant }}</td>
+              <td><button style="color: red;"(click)="HitDragon(item.id)"> Hit</button></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>

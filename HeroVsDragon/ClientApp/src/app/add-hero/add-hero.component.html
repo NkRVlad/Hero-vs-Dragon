@@ -1,0 +1,25 @@
+<h2>Create hero</h2>
+<div class = "required">
+    <div class = "alert alert-danger" *ngIf = "myForm.controls['userName'].invalid && myForm.controls['userName'].touched" >
+        Not be latin characters, numbers. Format(Nick) - OK, Format(2Nick2) - Not
+    </div>
+</div>
+<form [formGroup] = "myForm" #loginForm="ngForm" (ngSubmit)="create(loginForm)">
+    <div>
+      <div *ngIf="invalidHero" class="alert alert-danger">
+        Incorrect data entry
+      </div>
+      <div *ngIf="invalidHeroLength" class="alert alert-danger">
+        Max size name = 20. Min size name = 4 !
+      </div>
+      <br />
+      <label for="userName">Nickname</label>
+      <input type="text" id="userName" name="userName"  formControlName = "userName" ngModel class="form-control" required autofocus/>
+      <br />
+      <br />
+      <button  class="btm btn-lg btn-primary btn-block" type="submit">Create</button>
+      <br />
+    </div>
+  
+  
+  </form>

@@ -1,0 +1,30 @@
+<app-nav-menu-main></app-nav-menu-main>
+<div class="container">
+<div>
+    <label style="margin-right: 10px;" >Name sort</label>
+    <button style="margin-right: 10px;" (click)="sortNameAsc()">Ascending</button>
+    <button style="margin-right: 10px;" (click)="sortNameDesc()">Descending</button>
+</div>
+<div>
+    <label style="margin-right: 10px;" >Damage sort</label>
+    <button style="margin-right: 10px;" (click)="sortDamageAsc()">Ascending</button>
+    <button style="margin-right: 10px;" (click)="sortDamageDesc()">Descending</button>
+</div>
+<div>
+<pagination-controls style="margin-left: 30%;"  class="pagination" (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name Dragon</th>
+      <th scope="col">Damage</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of hero | paginate: { itemsPerPage: 30, currentPage: pageNumber, totalItems:Count }">
+          <td>{{ item.nameDragon }}</td>
+          <td>{{ item.damage }}</td>
+      </tr>
+  </tbody>
+</table>
+</div>

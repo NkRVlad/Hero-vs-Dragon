@@ -1,0 +1,19 @@
+<app-nav-menu></app-nav-menu>
+<div class="container">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+
+  <div>
+    <h2>Login</h2>
+      <div *ngIf="invalidLogin" class="alert alert-danger">
+        Invalid user credentials
+      </div>
+      <br />
+      <label for="userName">Nickname</label>
+      <input type="text" id="userName" name="userName" ngModel class="form-control" required autofocus />
+      <br />
+      <br />
+      <button class="btm btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <br />
+    </div>
+  </form>
+</div>

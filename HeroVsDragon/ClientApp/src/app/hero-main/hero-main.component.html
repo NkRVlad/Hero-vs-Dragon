@@ -1,0 +1,58 @@
+<app-nav-menu-main></app-nav-menu-main>
+<div class="container">
+<h2>List hero</h2>
+
+<div>
+    <label style="margin-right: 10px;" >Nickname sort</label>
+    <button style="margin-right: 10px;" (click)="sortAsc()">Ascending</button>
+    <button style="margin-right: 10px;" (click)="sortDesc()">descending</button>
+</div>
+<div style="margin-bottom: 15px; margin-top: 15px;">
+  <form #searchNicknameForm="ngForm" (ngSubmit)="searchNickname(searchNicknameForm)">
+    <input  id="textSearch" name="textSearch" ngModel type="text" placeholder="Enter nickname"/>
+    <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search</button>
+    <label style="margin-left: 10px;">All</label>
+    <input id="lengthNickname" style="margin-left: 4px;" value="" ngModel name="lengthNickname" type="radio" checked>
+    <label style="margin-left: 10px;">More than 5 characters</label>
+    <input id="lengthNickname" style="margin-left: 4px;" ngModel value="5" name="lengthNickname" type="radio">
+    <label style="margin-left: 10px;">More than 10 characters</label>
+    <input id="lengthNickname" style="margin-left: 4px;" ngModel value="10" name="lengthNickname" type="radio">
+  </form>
+</div>
+<div style="margin-bottom: 15px; margin-top: 15px;">
+  <button class="btn-primary" (click)="Discharge()">Discharge</button>
+</div>
+<div style="margin-bottom: 15px; margin-top: 15px;">
+  <form #searchTimeForm="ngForm" (ngSubmit)="searchTime(searchTimeForm)">
+    <input type="time" id="time" [(ngModel)] = "defaultTime" name="time" ngModel>
+    <button style="margin-left: 10px;" type="submit" class="btn btn-primary">Search</button>
+    <label style="margin-left: 10px;">All</label>
+    <input id="timeFilter" style="margin-left: 4px;" value="" ngModel name="timeFilter" type="radio" checked>
+    <label style="margin-left: 10px;">More</label>
+    <input id="timeFilter" style="margin-left: 4px;" ngModel value="more" name="timeFilter" type="radio">
+    <label style="margin-left: 10px;">Less</label>
+    <input id="timeFilter"  style="margin-left: 4px;" ngModel value="less" name="timeFilter" type="radio">
+  </form>
+</div>
+<div>
+  <pagination-controls style="margin-left: 30%;"  class="pagination" (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#id</th>
+        <th scope="col">Nickname</th>
+        <th scope="col">Date_Time</th>
+        <th scope="col">Gun</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of hero | paginate: { itemsPerPage: 30, currentPage: pageNumber, totalItems:Count }">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nickname }}</td>
+            <td>{{ item.date_Time | date: 'short'}}</td>
+            <td>{{ item.gun }}</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
